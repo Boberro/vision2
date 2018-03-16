@@ -1,0 +1,5 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+    <img src="{{ request.route_path('uploaded_file', uid=image.uid) }}" alt="{{ image.filename }}">
+{% endblock content %}
