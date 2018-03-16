@@ -4,6 +4,7 @@
 /uploads/
 !temp_uploads/IGNOREME
 !uploads/IGNOREME
+/*.sqlite
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
