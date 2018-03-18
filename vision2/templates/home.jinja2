@@ -1,7 +1,7 @@
 {% extends "layout.jinja2" %}
 
 {% block content %}
-    <form action="/upload_image" method="post" accept-charset="utf-8"
+    <form action="{{ request.route_path('upload_image') }}" method="post" accept-charset="utf-8"
           enctype="multipart/form-data">
 
         <label for="image">Upload image</label>

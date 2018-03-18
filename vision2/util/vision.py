@@ -27,9 +27,9 @@ def get_vision_data(request, image_data):
             })
 
         emotions = [
+            ("anger", face.anger_likelihood),
             ("joy", face.joy_likelihood),
             ("sorrow", face.sorrow_likelihood),
-            ("anger", face.anger_likelihood),
             ("surprise", face.surprise_likelihood)
         ]
         possible_dominant_emotion = sorted(emotions, key=lambda x: x[1], reverse=True)[0]
