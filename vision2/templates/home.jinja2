@@ -3,6 +3,13 @@
 {% block content %}
     <div class="row">
         <div class="col">
+            <div id="warning" class="alert alert-warning alert-dismissible fade d-none" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <span class="inner-text"></span>
+            </div>
+
             <div class="text-center">
                 <form action="{{ request.route_path('upload_image') }}" method="post" accept-charset="utf-8"
                       enctype="multipart/form-data">
@@ -19,9 +26,14 @@
         {% for thumbnail in thumbnails %}
             <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
                 <a href="{{ request.route_path('single_image', uid=thumbnail.uid) }}">
-                    <img src="{{ request.route_path('uploaded_file_thumbnail', uid=thumbnail.uid) }}" width="100%" height="100%">
+                    <img src="{{ request.route_path('uploaded_file_thumbnail', uid=thumbnail.uid) }}" width="100%"
+                         height="100%">
                 </a>
             </div>
         {% endfor %}
     </div>
 {% endblock content %}
+
+{% block js %}
+    <script type="text/javascript" src="{{ request.static_path('vision2:static/home.js') }}"></script>
+{% endblock %}

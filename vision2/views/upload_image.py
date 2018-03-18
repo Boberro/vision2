@@ -26,6 +26,15 @@ def store_image_action_view(request):
     thumb_path = os.path.join(uploads_directory, 'thumb_' + uid)
 
     input_file.seek(0)
+    face_detection_data, cropping_data = get_vision_data(request, input_file)
+
+    if not len(face_detection_data):
+        return HTTPFound(request.route_path('home', _query={'alert': '1'}))
+
+    input_file.seek(0)
+    crop_image(input_file, cropping_data, thumb_path)
+
+    input_file.seek(0)
     with open(temp_file_path, 'wb') as output_file:
         shutil.copyfileobj(input_file, output_file)
 
