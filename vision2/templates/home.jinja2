@@ -1,37 +1,50 @@
 {% extends "layout.jinja2" %}
 
 {% block content %}
-    <div class="row">
+    <div class="row upload-file">
         <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-center">
+                        <form action="{{ request.route_path('upload_image') }}" method="post" accept-charset="utf-8"
+                              enctype="multipart/form-data">
+
+                            <label class="btn btn-primary btn-file">
+                                Upload your file
+                                <input id="image_input" name="image" type="file" accept=".jpg,.jpeg,.png"
+                                       style="display: none;">
+                            </label>
+                        </form>
+                        <p>Click the button above to upload an image. It will be analysed and emojified.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
             <div id="warning" class="alert alert-warning alert-dismissible fade d-none" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <span class="inner-text"></span>
             </div>
-
-            <div class="text-center">
-                <form action="{{ request.route_path('upload_image') }}" method="post" accept-charset="utf-8"
-                      enctype="multipart/form-data">
-
-                    <label for="image_input">Upload image</label>
-                    <input id="image_input" name="image" type="file" accept=".jpg,.jpeg,.png" value=""/>
-
-                    <input type="submit" value="Submit"/>
-                </form>
-            </div>
         </div>
     </div>
-    <div class="row">
-        {% for thumbnail in thumbnails %}
-            <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
-                <a href="{{ request.route_path('single_image', uid=thumbnail.uid) }}">
-                    <img src="{{ request.route_path('uploaded_file_thumbnail', uid=thumbnail.uid) }}" width="100%"
-                         height="100%">
-                </a>
+    {% if thumbnails|length > 0 %}
+        <div class="row">
+            <div class="col-12">
+                <h1>Previously uploaded:</h1>
             </div>
-        {% endfor %}
-    </div>
+            {% for thumbnail in thumbnails %}
+                <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2 thumbnail">
+                    <a href="{{ request.route_path('single_image', uid=thumbnail.uid) }}">
+                        <img src="{{ request.route_path('uploaded_file_thumbnail', uid=thumbnail.uid) }}">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 {% endblock content %}
 
 {% block js %}

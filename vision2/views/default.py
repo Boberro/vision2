@@ -4,6 +4,7 @@ from vision2.models import UploadedImage
 import json
 import os
 import transaction
+import random
 
 
 @view_config(route_name='home', renderer='../templates/home.jinja2')
@@ -25,8 +26,13 @@ def single_image_view(request):
     if image is None:
         raise HTTPNotFound()
 
+    thumbnail_query = request.dbsession.query(UploadedImage).filter(UploadedImage.id != image.id)
+    number_of_thumbnails = min(4, thumbnail_query.count())
+    thumbnails = random.sample(thumbnail_query.all(), number_of_thumbnails)
+
     return {
         "image": image,
+        "thumbnails": thumbnails,
     }
 
 

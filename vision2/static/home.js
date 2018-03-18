@@ -19,4 +19,9 @@
         }
         warning.removeClass('d-none').addClass('show').find('span.inner-text').text(warning_text);
     }
+
+    $('#image_input').on('change', function () {
+        $.LoadingOverlay("show");
+        this.form.submit();
+    });
 })();

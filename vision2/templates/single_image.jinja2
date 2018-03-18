@@ -1,15 +1,15 @@
 {% extends "layout.jinja2" %}
 
 {% block content %}
-    <div class="row">
+    <div id="nav" class="row">
         <div class="col-md-12">
             <a href="{{ request.route_path('home') }}">
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                Back
+                <strong>Back to Home</strong>
             </a>
             <a class="pull-right" href="{{ request.route_path('delete_image', uid=image.uid) }}">
                 <i class="fa fa-trash" aria-hidden="true"></i>
-                Delete
+                Delete this file
             </a>
         </div>
     </div>
@@ -28,6 +28,20 @@
             </div>
         </div>
     </div>
+    {% if thumbnails|length > 0 %}
+        <div class="row thumbnails">
+            <div class="col-12">
+                <h1>Other uploaded:</h1>
+            </div>
+            {% for thumbnail in thumbnails %}
+                <div class="col-6 col-sm-3">
+                    <a href="{{ request.route_path('single_image', uid=thumbnail.uid) }}">
+                        <img src="{{ request.route_path('uploaded_file_thumbnail', uid=thumbnail.uid) }}">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 {% endblock content %}
 
 {% block js %}

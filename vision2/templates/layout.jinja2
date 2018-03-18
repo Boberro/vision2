@@ -33,23 +33,23 @@
 
 <body>
 
-<div class="starter-template">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                {% block content %}
-                    <p>No content</p>
-                {% endblock content %}
-            </div>
-        </div>
-        <div class="row">
-            <div class="copyright">
-                Copyright &copy; Mateusz Cyraniak 2018. Emoji provided by <a href="https://www.emojione.com/"
-                                                                             target="_blank">EmojiOne</a>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {% block content %}
+                <p>No content</p>
+            {% endblock content %}
         </div>
     </div>
 </div>
+<footer class="footer">
+    <div class="container">
+        <div class="copyright pull-right">
+            Copyright &copy; Mateusz Cyraniak 2018. Emoji provided by <a href="https://www.emojione.com/"
+                                                                         target="_blank">EmojiOne</a>
+        </div>
+    </div>
+</footer>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -60,6 +60,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.0.1/dist/loadingoverlay.min.js"></script>
 
 {% block js %}{% endblock %}
 </body>
