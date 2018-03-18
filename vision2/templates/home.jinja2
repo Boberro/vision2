@@ -1,12 +1,27 @@
 {% extends "layout.jinja2" %}
 
 {% block content %}
-    <form action="{{ request.route_path('upload_image') }}" method="post" accept-charset="utf-8"
-          enctype="multipart/form-data">
+    <div class="row">
+        <div class="col">
+            <div class="text-center">
+                <form action="{{ request.route_path('upload_image') }}" method="post" accept-charset="utf-8"
+                      enctype="multipart/form-data">
 
-        <label for="image">Upload image</label>
-        <input id="image_input" name="image" type="file" value=""/>
+                    <label for="image_input">Upload image</label>
+                    <input id="image_input" name="image" type="file" value=""/>
 
-        <input type="submit" value="submit"/>
-    </form>
+                    <input type="submit" value="Submit"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {% for thumbnail in thumbnails %}
+            <div class="col-6 col-sm-4 col-md-3 col-lg-3 col-xl-2">
+                <a href="{{ request.route_path('single_image', uid=thumbnail.uid) }}">
+                    <img src="{{ request.route_path('uploaded_file_thumbnail', uid=thumbnail.uid) }}" width="100%" height="100%">
+                </a>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock content %}

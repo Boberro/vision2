@@ -1,15 +1,25 @@
 {% extends "layout.jinja2" %}
 
 {% block content %}
-    <div id="image">
-        <img src="{{ request.route_path('uploaded_file', uid=image.uid) }}" alt="{{ image.filename }}">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ request.route_path('home') }}"><- Back to Home</a>
+        </div>
     </div>
-    <div id="helpers">
-        <img class="emoji-angry" src="{{ request.static_path('vision2:static/cancer/angry.png') }}" alt="">
-        <img class="emoji-joy" src="{{ request.static_path('vision2:static/cancer/joy.png') }}" alt="">
-        <img class="emoji-neutral" src="{{ request.static_path('vision2:static/cancer/neutral.png') }}" alt="">
-        <img class="emoji-sad" src="{{ request.static_path('vision2:static/cancer/sad.png') }}" alt="">
-        <img class="emoji-surprised" src="{{ request.static_path('vision2:static/cancer/surprised.png') }}" alt="">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <div id="image">
+                <img src="{{ request.route_path('uploaded_file', uid=image.uid) }}" alt="{{ image.filename }}">
+            </div>
+            <div id="helpers">
+                <img class="emoji-angry" src="{{ request.static_path('vision2:static/cancer/angry.png') }}" alt="">
+                <img class="emoji-joy" src="{{ request.static_path('vision2:static/cancer/joy.png') }}" alt="">
+                <img class="emoji-neutral" src="{{ request.static_path('vision2:static/cancer/neutral.png') }}" alt="">
+                <img class="emoji-sad" src="{{ request.static_path('vision2:static/cancer/sad.png') }}" alt="">
+                <img class="emoji-surprised" src="{{ request.static_path('vision2:static/cancer/surprised.png') }}"
+                     alt="">
+            </div>
+        </div>
     </div>
 {% endblock content %}
 

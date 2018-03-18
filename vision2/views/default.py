@@ -6,7 +6,10 @@ import json
 
 @view_config(route_name='home', renderer='../templates/home.jinja2')
 def home_view(request):
-    return {}
+    thumbnails = request.dbsession.query(UploadedImage).all()
+    return {
+        "thumbnails": thumbnails,
+    }
 
 
 @view_config(route_name='single_image', renderer='../templates/single_image.jinja2')

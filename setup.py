@@ -21,6 +21,7 @@ requires = [
     'bcrypt',
     'alembic',
     'google-cloud-vision',
+    'Pillow',
 ]
 
 tests_require = [

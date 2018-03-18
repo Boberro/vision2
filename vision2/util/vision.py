@@ -9,6 +9,15 @@ def get_vision_data(request, image_data):
     credentials = Credentials.from_service_account_file(key_path)
     client = vision.ImageAnnotatorClient(credentials=credentials)
     image = types.Image(content=image_data.read())
+
+    face_detection_data = _detect_faces(client, image)
+
+    cropping_data = _detect_cropping(client, image)
+
+    return face_detection_data, cropping_data
+
+
+def _detect_faces(client, image):
     response = client.face_detection(image=image)
     error = response.error
     if error:
@@ -46,3 +55,20 @@ def get_vision_data(request, image_data):
             "roll": roll,
         })
     return data
+
+
+def _detect_cropping(client, image):
+    crop_hints_params = types.CropHintsParams(aspect_ratios=[1.0])
+    image_context = types.ImageContext(crop_hints_params=crop_hints_params)
+
+    response = client.crop_hints(image=image, image_context=image_context)
+    hints = response.crop_hints_annotation.crop_hints
+
+    vertices = []
+    for v in hints[0].bounding_poly.vertices:
+        vertices.append({
+            "x": v.x,
+            "y": v.y,
+        })
+
+    return vertices
