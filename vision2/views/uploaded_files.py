@@ -12,7 +12,7 @@ def uploaded_file_static_view(request):
         return HTTPNotFound()
 
     uploads_directory = request.registry.settings.get('vision2.uploads_directory', '/tmp')
-    path = os.path.join(uploads_directory, uid)
+    path = os.path.join(uploads_directory, uid + '.jpg')
 
     response = FileResponse(
         path,
@@ -29,7 +29,7 @@ def uploaded_file_thumbnail_static_view(request):
         return HTTPNotFound()
 
     uploads_directory = request.registry.settings.get('vision2.uploads_directory', '/tmp')
-    path = os.path.join(uploads_directory, 'thumb_' + uid)
+    path = os.path.join(uploads_directory, 'thumb_' + uid + '.jpg')
 
     response = FileResponse(
         path,

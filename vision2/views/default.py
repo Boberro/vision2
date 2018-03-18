@@ -53,8 +53,8 @@ def delete_image_action(request):
         ).delete()
 
     uploads_directory = request.registry.settings.get('vision2.uploads_directory', '/tmp')
-    file_path = os.path.join(uploads_directory, uid)
-    thumb_path = os.path.join(uploads_directory, 'thumb_' + uid)
+    file_path = os.path.join(uploads_directory, uid + '.jpg')
+    thumb_path = os.path.join(uploads_directory, 'thumb_' + uid + '.jpg')
 
     try:
         os.remove(file_path)

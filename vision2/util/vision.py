@@ -8,6 +8,7 @@ def get_vision_data(request, image_data):
     key_path = request.registry.settings.get('vision2.service_key_path', None)
     credentials = Credentials.from_service_account_file(key_path)
     client = vision.ImageAnnotatorClient(credentials=credentials)
+    image_data.seek(0)
     image = types.Image(content=image_data.read())
 
     face_detection_data = _detect_faces(client, image)
@@ -20,14 +21,9 @@ def get_vision_data(request, image_data):
 def _detect_faces(client, image):
     response = client.face_detection(image=image)
     error = response.error
-    if error:
-        print "Error:"
-        print error
     faces = response.face_annotations
     data = []
     for face in faces:
-        print "Face:"
-
         vertices = []
         for v in face.fd_bounding_poly.vertices:
             vertices.append({
