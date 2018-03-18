@@ -8,6 +8,7 @@ def includeme(config):
     config.add_route('home', '/')
     config.add_route('upload_image', '/upload_image/')
     config.add_route('single_image', '/img/{uid}/')
+    config.add_route('delete_image', '/img/{uid}/delete/')
     config.add_route('uploaded_file', '/uploaded_files/{uid}/')
-    config.add_route('uploaded_file_thumbnail', '/uploaded_files/{uid}/thumbnail')
+    config.add_route('uploaded_file_thumbnail', '/uploaded_files/{uid}/thumbnail/')
     config.add_route('single_image_vision_data', '/img/{uid}/vision_data.json')
