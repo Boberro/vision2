@@ -2,11 +2,12 @@
 import os
 import uuid
 import shutil
-from pyramid.response import Response
 from pyramid.view import view_config
 from vision2.models import UploadedImage
 import transaction
 from pyramid.httpexceptions import HTTPFound
+from vision2.util.vision import get_vision_data
+import json
 
 
 @view_config(route_name='upload_image')
@@ -29,10 +30,14 @@ def store_image_action_view(request):
 
     os.rename(temp_file_path, file_path)
 
+    input_file.seek(0)
+    vision_data = get_vision_data(request, input_file)
+
     with transaction.manager:
         file_record = UploadedImage(
             filename=filename,
             uid=uid,
+            face_data=json.dumps(vision_data),
         )
         request.dbsession.add(file_record)
 
