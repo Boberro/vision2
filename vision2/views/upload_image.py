@@ -6,7 +6,7 @@ from pyramid.view import view_config
 from vision2.models import UploadedImage
 import transaction
 from pyramid.httpexceptions import HTTPFound
-from vision2.util import get_vision_data, crop_image
+from vision2.util import get_vision_data, crop_image, is_image
 import json
 
 
@@ -18,6 +18,9 @@ def store_image_action_view(request):
     filename = request.POST['image'].filename
 
     input_file = request.POST['image'].file
+
+    if not is_image(input_file):
+        return HTTPFound(request.route_path('home', _query={'alert': '2'}))
 
     uid = '%s' % uuid.uuid4()
 

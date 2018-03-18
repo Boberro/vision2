@@ -7,9 +7,14 @@
         url_vars[hash[0]] = hash[1];
     }
 
-    if (url_vars.alert === '1') {
+    if (url_vars.alert) {
         var warning = $('#warning');
-        var warning_text = 'No faces found in the uploaded picture. File not saved.';
+        var warning_text = '';
+        if (url_vars.alert === '1') {
+            warning_text = 'No faces found in the uploaded picture. File not saved.';
+        } else if (url_vars.alert === '2') {
+            warning_text = 'This file is not of supported image type.';
+        }
         warning.removeClass('d-none').addClass('show').find('span.inner-text').text(warning_text);
     }
 })();
