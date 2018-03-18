@@ -15,9 +15,11 @@ def store_image_action_view(request):
     uploads_directory = request.registry.settings.get('vision2.uploads_directory', '/tmp')
     temp_uploads_directory = request.registry.settings.get('vision2.temp_uploads_directory', '/tmp')
 
-    filename = request.POST['image'].filename
-
-    input_file = request.POST['image'].file
+    try:
+        filename = request.POST['image'].filename
+        input_file = request.POST['image'].file
+    except AttributeError:
+        return HTTPFound(request.route_path('home', _query={'alert': '3'}))
 
     if not is_image(input_file):
         return HTTPFound(request.route_path('home', _query={'alert': '2'}))

@@ -14,6 +14,8 @@
             warning_text = 'No faces found in the uploaded picture. File not saved.';
         } else if (url_vars.alert === '2') {
             warning_text = 'This file is not of supported image type.';
+        } else if (url_vars.alert === '3') {
+            warning_text = 'No file sent';
         }
         warning.removeClass('d-none').addClass('show').find('span.inner-text').text(warning_text);
     }
