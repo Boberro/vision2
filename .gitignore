@@ -1,9 +1,9 @@
-/.venv/
-/.idea/
-/temp_uploads/
-/uploads/
+temp_uploads/*
+uploads/*
 !temp_uploads/IGNOREME
 !uploads/IGNOREME
+/.venv/
+/.idea/
 /*.sqlite
 key.json
 
