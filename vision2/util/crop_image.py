@@ -11,5 +11,6 @@ def crop_image(image_stream, vertices, path, width=256):
 
     thumb = image.crop((min_x, min_y, max_x, max_y))
     thumb.thumbnail((width, width))
+    thumb = thumb.convert("RGB")
     thumb.save(path, format="jpeg")
     return thumb
