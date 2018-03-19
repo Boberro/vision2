@@ -5,6 +5,16 @@ from google.oauth2.service_account import Credentials
 
 
 def get_vision_data(request, image_data):
+    """
+    Main caveat of this app. Sends image data for an analysis, and from the response it takes boundaries of detected
+    faces and suggested crop (1:1 ratio).
+    I suspect that client object should have been created on server start and kept as a request method, but with how
+    "extensive" google's documentation is, I have no idea if client has any timeout and/or any other issues that would
+    need to be tackled with this approach.
+    :param request: Pyramid request object
+    :param image_data: File stream
+    :return:
+    """
     key_path = request.registry.settings.get('vision2.service_key_path', None)
     if key_path is not None:
         credentials = Credentials.from_service_account_file(key_path)
@@ -23,6 +33,13 @@ def get_vision_data(request, image_data):
 
 
 def _detect_faces(client, image):
+    """
+    Get facial recognition data from vision api, turn boundaries data into strigified json object (it's being used on
+    front-end only, so no need to keep discrete data in the database).
+    :param client:
+    :param image: Google vision api Image object
+    :return:
+    """
     response = client.face_detection(image=image)
     error = response.error
     faces = response.face_annotations
@@ -58,6 +75,12 @@ def _detect_faces(client, image):
 
 
 def _detect_cropping(client, image):
+    """
+    Get cropping hints for 1:1 ratio from vision api.
+    :param client:
+    :param image:
+    :return:
+    """
     crop_hints_params = types.CropHintsParams(aspect_ratios=[1.0])
     image_context = types.ImageContext(crop_hints_params=crop_hints_params)
 

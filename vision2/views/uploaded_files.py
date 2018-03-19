@@ -7,6 +7,11 @@ import os
 
 @view_config(route_name='uploaded_file')
 def uploaded_file_static_view(request):
+    """
+    "Static" view responding with an image, that has been previously uploaded to the server.
+    :param request:
+    :return:
+    """
     uid = request.matchdict.get('uid', None)
     if uid is None:
         return HTTPNotFound()
@@ -24,6 +29,11 @@ def uploaded_file_static_view(request):
 
 @view_config(route_name='uploaded_file_thumbnail')
 def uploaded_file_thumbnail_static_view(request):
+    """
+    "Static" view responding with thumbnail of an image, that has been previously uploaded to the server.
+    :param request:
+    :return:
+    """
     uid = request.matchdict.get('uid', None)
     if uid is None:
         return HTTPNotFound()

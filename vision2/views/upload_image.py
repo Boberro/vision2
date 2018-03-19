@@ -12,6 +12,13 @@ import json
 
 @view_config(route_name='upload_image', request_method='POST')
 def store_image_action_view(request):
+    """
+    View for uploading images. Uploaded file is tested for being an image, then tested with google's vision api for
+    face recognition data. If any faces are found, image is saved to the server, thumbnail created and data recorded in
+    the database.
+    :param request:
+    :return:
+    """
     uploads_directory = request.registry.settings.get('vision2.uploads_directory', '/tmp')
     temp_uploads_directory = request.registry.settings.get('vision2.temp_uploads_directory', '/tmp')
 
