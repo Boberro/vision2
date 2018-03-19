@@ -6,8 +6,12 @@ from google.oauth2.service_account import Credentials
 
 def get_vision_data(request, image_data):
     key_path = request.registry.settings.get('vision2.service_key_path', None)
-    credentials = Credentials.from_service_account_file(key_path)
-    client = vision.ImageAnnotatorClient(credentials=credentials)
+    if key_path is not None:
+        credentials = Credentials.from_service_account_file(key_path)
+        client = vision.ImageAnnotatorClient(credentials=credentials)
+    else:
+        client = vision.ImageAnnotatorClient()
+
     image_data.seek(0)
     image = types.Image(content=image_data.read())
 
