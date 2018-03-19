@@ -10,7 +10,7 @@ from vision2.util import get_vision_data, crop_image, is_image, save_as_jpeg
 import json
 
 
-@view_config(route_name='upload_image')
+@view_config(route_name='upload_image', request_method='POST')
 def store_image_action_view(request):
     uploads_directory = request.registry.settings.get('vision2.uploads_directory', '/tmp')
     temp_uploads_directory = request.registry.settings.get('vision2.temp_uploads_directory', '/tmp')
