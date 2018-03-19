@@ -36,7 +36,7 @@ def single_image_view(request):
     }
 
 
-@view_config(route_name='single_image_vision_data', renderer='json')
+@view_config(route_name='single_image_vision_data', renderer='string')
 def get_vision_data_view(request):
     uid = request.matchdict.get('uid', None)
 
@@ -44,9 +44,7 @@ def get_vision_data_view(request):
         UploadedImage.uid == uid
     ).first()
 
-    data = json.loads(image.face_data)
-
-    return data
+    return image.face_data
 
 
 @view_config(route_name='delete_image')
